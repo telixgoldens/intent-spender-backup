@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { parseIntentAI } from "../aiParser/parseIntentAI";
+import "./IntentForm.css"
 
 const IntentForm = ({ executeIntent }) => {
   const [textInput, setTextInput] = useState("");
@@ -54,7 +55,7 @@ const IntentForm = ({ executeIntent }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} style={{ marginTop: "1rem" }}>
+      <form onSubmit={handleSubmit} className="intent-form">
       {!manualMode ? (
         <>
         <input
@@ -62,9 +63,9 @@ const IntentForm = ({ executeIntent }) => {
           value={textInput}
           onChange={(e) => setTextInput(e.target.value)}
           placeholder='e.g. "Send 0.1 TTRUST to 0xABC for lunch"'
-          style={{ width: "400px", padding: "0.5rem" }}
+          style={{ width: "370px", padding: "0.5rem" }}
         />
-        <button type="submit" style={{ marginLeft: "1rem" }}>Send</button>
+        <button type="submit" className="btn-primary">Send</button>
         </>
       ):(
          <>
@@ -92,11 +93,11 @@ const IntentForm = ({ executeIntent }) => {
             value={form.note}
             onChange={(e) => setForm({ ...form, note: e.target.value })}
           />
-          <button type="submit">Send Manual</button>
+          <button type="submit" className="btn-primary">Send Manual</button>
         </>
       )}
       </form>
-      <button onClick={startVoiceInput} style={{ marginTop: "1rem" }}>
+      <button onClick={startVoiceInput} className="btn-secondary">
         Speak Intent
       </button>
     </div>

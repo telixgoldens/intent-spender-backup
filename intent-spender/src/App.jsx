@@ -5,6 +5,7 @@ import IntentForm from "./components/IntentForm";
 import ABI from "./IntentSpenderMulti.json"; // Add ABI from Solidity compile
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 const CONTRACT_ADDRESS = "0x85dE3b7B75589f450F24BBfe0c02066a38716c37"; // Replace with deployed contract
 
@@ -151,16 +152,31 @@ function App() {
   };
 
   return (
-    <div className="app-container" style={{ padding: "2rem" }}>
-      <h1>Intent-Based Spender</h1>
-      <button onClick={connectWallet}> {address ? `Connected: ${address.slice(0, 6)}...${address.slice(-4)}` : "Connect Wallet"}
-      </button>
-      <IntentForm executeIntent={executeIntent} />
-      <div style={{ marginTop: "2rem" }}>
-        <h2>Activity Log:</h2>
-        {log.map((entry, idx) => <div key={idx}>{entry}</div>)}
+    <div className="app">
+      <div className="card">
+        <h1 className="title">Intent-Based Spender</h1>
+        <button className="connect-btn" onClick={connectWallet}>
+          {address
+            ? `Connected: ${address.slice(0, 6)}...${address.slice(-4)}`
+            : "Connect Wallet"}
+        </button>
+
+        <div className="form-container">
+          <IntentForm executeIntent={executeIntent} />
+        </div>
+
+        <div className="log-container">
+          <h2>Activity Log</h2>
+          <div className="log-box">
+            {log.length === 0 ? (
+              <p>No activity yet</p>
+            ) : (
+              log.map((entry, idx) => <div key={idx}>{entry}</div>)
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+      </div>
   );
 }
 <ToastContainer position="top-right" autoClose={4000} />
